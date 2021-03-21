@@ -10,9 +10,11 @@ namespace ShareAndCare.Models
     public class File
     {
         public int Id { get; set; }
-
+        [Required]
+        [StringLength(128)]
         public String FileName { get; set; }
-
+        [Required]
+        [StringLength(128)]
         public String FilePath { get; set; }
     }
 }

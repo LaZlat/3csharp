@@ -75,7 +75,8 @@ Title="Chat and Files share" Height="512.8" Width="819.2">
                     <ListView Grid.Column="2" Grid.Row="1" ItemsSource="{Binding Friends}" Margin="0,0.4,0.2,0.2">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Username}" Header="Username"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding FileName}" Header="File's name"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding FilePath}" Header="File's path"/>
                             </GridView>
                         </ListView.View>
                     </ListView>

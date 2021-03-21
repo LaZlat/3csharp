@@ -59,11 +59,13 @@ namespace ShareAndCare.ViewModels
         {
             get
             {
+                ObservableCollection<File> newOne = new ObservableCollection<File>();
                 var cont = new TheContext();
 
-                var smth = cont.Users.Where(a => a.Username == user.Username).Select(a => a.Files).SingleOrDefault();
-   
-                ObservableCollection < File > newOne = new ObservableCollection<File>(smth);
+                var smth = cont.Users.Where(a => a.Username == user.Username).Select(a => a.Files).FirstOrDefault();
+                if (smth != null)
+                    newOne = new ObservableCollection<File>(smth);
+
                 cont.Dispose();
 
                 return newOne;
@@ -79,7 +81,7 @@ namespace ShareAndCare.ViewModels
                 {
                     var smth = cont.Users.Where(a => a.Username == user.Username).SelectMany(a => a.Friends);
                     var qq = smth.Select(x => x.FriendId).ToList();
-                    var xx = cont.Users.Where(p => !qq.Contains(p.Id)).ToList();
+                    var xx = cont.Users.Where(p => !qq.Contains(p.Id)).Where(c => c.Id != user.Id).ToList();
                     newOne = new ObservableCollection<User>(xx);
                 }
 
@@ -106,14 +108,18 @@ namespace ShareAndCare.ViewModels
         {
             get
             {
-                ObservableCollection<File> newOne = new ObservableCollection<File>();
-                //using (var cont = new TheContext())
-               // {
-                    //var smth = cont.Friends.SelectMany(a => a.Files).ToList();
-                   // newOne = new ObservableCollection<File>(smth);
-                //}
+                ObservableCollection<File> newOne;
+                List<File> oho = new();
+                using (var cont = new TheContext())
+                {
+                    var smth = cont.Users.Where(a => a.Id == user.Id).SelectMany(a => a.Friends);
+                    var qq = smth.Select(x => x.FriendId).ToList();
+                    var xx = cont.Users.Where(a => qq.Contains(a.Id)).SelectMany(a => a.Files);
 
-                return newOne;
+
+                    newOne = new ObservableCollection<File>(xx);
+                    return newOne;
+                }
             }
         }
 
@@ -135,8 +141,10 @@ namespace ShareAndCare.ViewModels
         {
             var cont = new TheContext();
 
+            cont.Users.Attach(user);
             user.Files.Add(new File { FileName = file.FileName , FilePath = file.FilePath });
             cont.Users.Update(user);
+            cont.Users.Attach(user);
 
             cont.SaveChanges();
             cont.Dispose();
@@ -160,10 +168,10 @@ namespace ShareAndCare.ViewModels
         public void SendMessage()
         {
             var cont = new TheContext();
-
+            cont.Users.Attach(user);
             user.Msg.Add(new Message { Msg = user.Username + ": " + Message });
+            cont.Users.Attach(user);
             cont.Users.Update(user);
-
             cont.SaveChanges();
             cont.Dispose();
 
@@ -212,13 +220,20 @@ namespace ShareAndCare.ViewModels
                   ?? (_addFriendCommand = new RelayCommand<User>(
                     _friend =>
                     {
-                        using (var cont = new TheContext())
-                        {
-                            //user.Friends.Add(new Friend { Files = _friend.Files });
-                            cont.Users.Update(user);
-                            cont.SaveChanges();
-                        }
+                        var cont = new TheContext();
+
+                        cont.Users.Attach(user);
+
+                        user.Friends.Add(new Friend { FriendId = _friend.Id });
+                        cont.Users.Update(user);
+                        cont.Users.Attach(user);
+
+                        cont.SaveChanges();
+
+                        cont.Dispose();
+                        OnPropertyChanged("People");
                         OnPropertyChanged("Friends");
+
                     }));
             }
         }

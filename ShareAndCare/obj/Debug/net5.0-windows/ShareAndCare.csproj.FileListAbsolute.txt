@@ -1,8 +1,3 @@
-C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\MainWindow.g.cs
-C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\Views\ApplicationWindow.g.cs
-C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\App.g.cs
-C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\ShareAndCare_MarkupCompile.cache
-C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\ShareAndCare_MarkupCompile.lref
 C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\bin\Debug\net5.0-windows\ShareAndCare.exe
 C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\bin\Debug\net5.0-windows\ShareAndCare.deps.json
 C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\bin\Debug\net5.0-windows\ShareAndCare.runtimeconfig.json
@@ -51,8 +46,15 @@ C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\bin\Debug\net5.0-windows
 C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\bin\Debug\net5.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\bin\Debug\net5.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\bin\Debug\net5.0-windows\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
-C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\ShareAndCare.csprojAssemblyReference.cache
+C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\Components\BindablePass.g.cs
+C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\MainWindow.g.cs
+C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\Views\ApplicationWindow.g.cs
+C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\App.g.cs
+C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\ShareAndCare_MarkupCompile.cache
+C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\ShareAndCare_MarkupCompile.lref
 C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\App.baml
+C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\Components\BindablePass.baml
 C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\MainWindow.baml
 C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\Views\ApplicationWindow.baml
 C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\ShareAndCare.g.resources
@@ -65,3 +67,4 @@ C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows
 C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\ref\ShareAndCare.dll
 C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\ShareAndCare.pdb
 C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\ShareAndCare.genruntimeconfig.cache
+C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\obj\Debug\net5.0-windows\ShareAndCare.csprojAssemblyReference.cache

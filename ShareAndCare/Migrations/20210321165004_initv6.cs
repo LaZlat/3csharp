@@ -2,7 +2,7 @@
 
 namespace ShareAndCare.Migrations
 {
-    public partial class Init : Migration
+    public partial class initv6 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,8 @@ namespace ShareAndCare.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FriendId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,6 +1,7 @@
 ﻿
 namespace ShareAndCare.ViewModels
 {
+    using GalaSoft.MvvmLight.Views;
     using ShareAndCare.Commands;
     using ShareAndCare.DataContext;
     using ShareAndCare.Models;
@@ -28,10 +29,10 @@ namespace ShareAndCare.ViewModels
             get
             {
                 Error = null;
-                if (columnName == "Username")
-                    if (string.IsNullOrWhiteSpace(Username))
+                if (columnName == "Username" || columnName == "Pass")
+                    if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Pass))
                     {
-                        Error = "Username is a must!";
+                        Error = "Username and Password is a must!";
                     }
                 return Error;
             }
@@ -49,33 +50,44 @@ namespace ShareAndCare.ViewModels
             }
         }
 
+        public string Pass
+        {
+            get
+            {
+                return user.Password.Secret;
+            }
+            set
+            {
+                user.Password.Secret = value;
+            }
+        }
+
         public ICommand LoginCommand
         {
             get;
             private set;
         }
 
-
         public string Error { get; private set; }
 
         public void LoginUser(object parameter)
         {
             var cont = new TheContext();
-           
 
-               var existingUser = cont.Users.Where(s => s.Username == user.Username).FirstOrDefault<User>();
-               if (existingUser == null)
-                {
-                    cont.Add(user);
-                    cont.SaveChanges();
+            var existingUser = cont.Users.Where(s => s.Username == user.Username).SingleOrDefault<User>();
+            if (existingUser == null)
+            {
+                cont.Add(user);
+                cont.SaveChanges();
+                
+                existingUser = cont.Users.Where(s => s.Username == user.Username).SingleOrDefault<User>(); 
+            }
 
-                    existingUser = cont.Users.Where(s => s.Username == user.Username).FirstOrDefault<User>();
-
-                    cont.Dispose();
-                }
-
-            
-            if (parameter is System.Windows.Window)
+            cont.Passwords.Attach(cont.Passwords.Where(a => a.User == existingUser).SingleOrDefault());
+            cont.Dispose();
+            if (Pass == existingUser.Password.Secret)
+            {
+                if (parameter is System.Windows.Window)
                 {
                     ApplicationWindow view = new ApplicationWindow();
                     applicationViewModel = new ApplicationViewModel(existingUser);
@@ -86,6 +98,15 @@ namespace ShareAndCare.ViewModels
                     (parameter as System.Windows.Window).Close();
                 }
             }
+            else
+            {
+                Username = "";
+                Pass = "";
+                OnPropertyChanged("Username");
+                OnPropertyChanged("Pass");
+            }
+        }
+            
 
         }
 

@@ -11,6 +11,8 @@ namespace ShareAndCare.Models
     public class Friend
     {
         public int Id { get; set; }
+        [Required]
+        [StringLength(128)]
         public int FriendId { get; set; }
         public ICollection<User> Users { get; set; }
     }

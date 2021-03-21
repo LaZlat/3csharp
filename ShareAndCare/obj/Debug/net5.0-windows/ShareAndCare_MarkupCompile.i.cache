@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\s033860\source\repos\ShareAndCare\ShareAndCare\App.xaml
-2368822016
+3-711873335
 
-27-811764713
+272031325942
 218602974824
-MainWindow.xaml;Views\ApplicationWindow.xaml;
+Components\BindablePass.xaml;MainWindow.xaml;Views\ApplicationWindow.xaml;
 
 False
 

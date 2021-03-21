@@ -10,8 +10,8 @@ using ShareAndCare.DataContext;
 namespace ShareAndCare.Migrations
 {
     [DbContext(typeof(TheContext))]
-    [Migration("20210320150432_Init")]
-    partial class Init
+    [Migration("20210321165004_initv6")]
+    partial class initv6
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -65,6 +65,9 @@ namespace ShareAndCare.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FriendId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

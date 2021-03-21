@@ -10,8 +10,8 @@ using ShareAndCare.DataContext;
 namespace ShareAndCare.Migrations
 {
     [DbContext(typeof(TheContext))]
-    [Migration("20210320175436_friendhasfiles")]
-    partial class friendhasfiles
+    [Migration("20210321181246_newPasstable")]
+    partial class newPasstable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,15 +49,10 @@ namespace ShareAndCare.Migrations
                     b.Property<string>("FilePath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FriendId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FriendId");
 
                     b.HasIndex("UserId");
 
@@ -70,6 +65,9 @@ namespace ShareAndCare.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FriendId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -94,6 +92,19 @@ namespace ShareAndCare.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("ShareAndCare.Models.Password", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Secret")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Passwords");
                 });
 
             modelBuilder.Entity("ShareAndCare.Models.User", b =>
@@ -128,10 +139,6 @@ namespace ShareAndCare.Migrations
 
             modelBuilder.Entity("ShareAndCare.Models.File", b =>
                 {
-                    b.HasOne("ShareAndCare.Models.Friend", null)
-                        .WithMany("Files")
-                        .HasForeignKey("FriendId");
-
                     b.HasOne("ShareAndCare.Models.User", null)
                         .WithMany("Files")
                         .HasForeignKey("UserId");
@@ -144,9 +151,15 @@ namespace ShareAndCare.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("ShareAndCare.Models.Friend", b =>
+            modelBuilder.Entity("ShareAndCare.Models.Password", b =>
                 {
-                    b.Navigation("Files");
+                    b.HasOne("ShareAndCare.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ShareAndCare.Models.User", b =>

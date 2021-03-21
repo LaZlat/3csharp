@@ -42,10 +42,14 @@ namespace ShareAndCare.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FileName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("FilePath")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
@@ -65,6 +69,7 @@ namespace ShareAndCare.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("FriendId")
+                        .HasMaxLength(128)
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -80,7 +85,9 @@ namespace ShareAndCare.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Msg")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
@@ -92,6 +99,21 @@ namespace ShareAndCare.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("ShareAndCare.Models.Password", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Secret")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Passwords");
+                });
+
             modelBuilder.Entity("ShareAndCare.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -100,7 +122,9 @@ namespace ShareAndCare.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)");
 
                     b.HasKey("Id");
 
@@ -136,11 +160,24 @@ namespace ShareAndCare.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("ShareAndCare.Models.Password", b =>
+                {
+                    b.HasOne("ShareAndCare.Models.User", "User")
+                        .WithOne("Password")
+                        .HasForeignKey("ShareAndCare.Models.Password", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ShareAndCare.Models.User", b =>
                 {
                     b.Navigation("Files");
 
                     b.Navigation("Msg");
+
+                    b.Navigation("Password");
                 });
 #pragma warning restore 612, 618
         }

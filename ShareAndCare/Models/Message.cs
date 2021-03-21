@@ -10,7 +10,8 @@ namespace ShareAndCare.Models
     public class Message
     {
         public int Id { get; set; }
-
+        [Required]
+        [StringLength(256)]
         public string Msg { get; set; }
     }
 }
