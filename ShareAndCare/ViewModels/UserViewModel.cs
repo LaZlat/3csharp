@@ -2,6 +2,7 @@
 namespace ShareAndCare.ViewModels
 {
     using GalaSoft.MvvmLight.Views;
+    using Microsoft.EntityFrameworkCore;
     using ShareAndCare.Commands;
     using ShareAndCare.DataContext;
     using ShareAndCare.Models;
@@ -80,9 +81,9 @@ namespace ShareAndCare.ViewModels
                 cont.Add(user);
                 cont.SaveChanges();
                 
-                existingUser = cont.Users.Where(s => s.Username == user.Username).SingleOrDefault<User>(); 
+                existingUser = cont.Users.Where(s => s.Username == user.Username).SingleOrDefault<User>();
             }
-
+            //.Include(c => c.Password)
             cont.Passwords.Attach(cont.Passwords.Where(a => a.User == existingUser).SingleOrDefault());
             cont.Dispose();
             if (Pass == existingUser.Password.Secret)

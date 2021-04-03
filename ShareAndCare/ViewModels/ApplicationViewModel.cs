@@ -3,6 +3,7 @@ namespace ShareAndCare.ViewModels
 {
     using GalaSoft.MvvmLight.Command;
     using Microsoft.Win32;
+    using Newtonsoft.Json;
     using ShareAndCare.Commands;
     using ShareAndCare.DataContext;
     using ShareAndCare.Models;
@@ -11,6 +12,8 @@ namespace ShareAndCare.ViewModels
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Text;
     using System.Threading.Tasks;
     using System.Windows.Input;
@@ -89,17 +92,42 @@ namespace ShareAndCare.ViewModels
             }
         }
 
+        public async Task<List<string>> aaa()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:5001/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = await client.GetAsync("ShareCare/GetMessages").ConfigureAwait(false);
+                //if (response.IsSuccessStatusCode)
+                // {
+                var product = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<List<string>>(product);
+                return result;
+            }
+        }
+
         public ObservableCollection<string> Msg
         {
             get
             {
-                ObservableCollection<string> newOne;
+                var xx = aaa().Wait();
+                ObservableCollection<string> newOne = new ObservableCollection<string>();
                 using (var cont = new TheContext()) 
                 {
                     var smth = cont.Messages.Select(a => a.Msg).ToList();
                     newOne = new ObservableCollection<string>(smth);
                 }
 
+                
+                /*string url = string.Format("https://localhost:5001/ShareCare/GetMessages");
+
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+                string result = client.GetStringAsync(url).Result;
+
+                System.Console.Write(result);*/
                 return newOne;
             }
         }
@@ -174,6 +202,8 @@ namespace ShareAndCare.ViewModels
             cont.Users.Update(user);
             cont.SaveChanges();
             cont.Dispose();
+
+
 
             OnPropertyChanged("Msg");
             Message = "";

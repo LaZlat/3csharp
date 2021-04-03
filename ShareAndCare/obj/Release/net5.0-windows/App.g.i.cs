@@ -59,7 +59,7 @@ namespace ShareAndCare {
             
             #line default
             #line hidden
-            System.Uri resourceLocater = new System.Uri("/ShareAndCare;component/app.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ShareAndCare;V1.0.0.0;component/app.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\App.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

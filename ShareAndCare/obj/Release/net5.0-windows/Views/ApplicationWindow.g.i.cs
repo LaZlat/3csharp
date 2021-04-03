@@ -54,7 +54,7 @@ namespace ShareAndCare.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ShareAndCare;component/views/applicationwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ShareAndCare;V1.0.0.0;component/views/applicationwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\ApplicationWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
