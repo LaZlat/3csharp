@@ -100,7 +100,7 @@ namespace ShareWebAPI.Controllers
         }
 
         [HttpPut("[action]/{username}")]
-        public IActionResult PostFriend(string username, [FromBody] JsonElement value)
+        public IActionResult PutFriend(string username, [FromBody] JsonElement value)
         {
             string json = value.GetRawText();
             Friend temp = JsonConvert.DeserializeObject<Friend>(json);
